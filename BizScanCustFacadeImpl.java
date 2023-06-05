@@ -42,18 +42,6 @@ public class BizScanCustFacadeImpl implements BizScanCustFacade {
 				lockRedisUtils.lockRequest(bizScanCustDTO.getProductId(),bizScanCustDTO.getProductSeqId(),
 						bizScanCustDTO.getProductSeqDate(),bizScanCustDTO.getProductSeqTime(), SqrcBizFacadeEnum.AT_SCANCUST_PAY_SYNC.getTransType());
 				sqrcTemplate = SqrcTemplateEnum.valueOf(SqrcBizFacadeEnum.AT_SCANCUST_PAY_SYNC.getTemplateName());
-			} else if(!StringUtils.isEmpty(bizScanCustDTO.getPayTransType()) &&
-					TransTypeEnum.HLB_SCAN_PAY.getTransTypeCode().equals(bizScanCustDTO.getPayTransType())){
-				// 分布式上锁
-                lockRedisUtils.lockRequest(bizScanCustDTO.getProductId(),bizScanCustDTO.getProductSeqId(),
-                        bizScanCustDTO.getProductSeqDate(),bizScanCustDTO.getProductSeqTime(), SqrcBizFacadeEnum.HLB_SCAN_PAY.getTransType());
-                sqrcTemplate = SqrcTemplateEnum.valueOf(SqrcBizFacadeEnum.HLB_SCAN_PAY.getTemplateName());
-			}  if(!StringUtils.isEmpty(bizScanCustDTO.getPayTransType()) &&
-					TransTypeEnum.HLB_AGGREGATION_SCAN_PAY.getTransTypeCode().equals(bizScanCustDTO.getPayTransType())){
-				// 分布式上锁
-                lockRedisUtils.lockRequest(bizScanCustDTO.getProductId(),bizScanCustDTO.getProductSeqId(),
-                        bizScanCustDTO.getProductSeqDate(),bizScanCustDTO.getProductSeqTime(), SqrcBizFacadeEnum.HLB_AGGREGATION_SCAN_PAY.getTransType());
-                sqrcTemplate = SqrcTemplateEnum.valueOf(SqrcBizFacadeEnum.HLB_AGGREGATION_SCAN_PAY.getTemplateName());
 			} else{
 				// 分布式上锁
 				lockRedisUtils.lockRequest(bizScanCustDTO.getProductId(),bizScanCustDTO.getProductSeqId(),
